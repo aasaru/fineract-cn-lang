@@ -1,20 +1,26 @@
 language: java
 
+sudo: false
+
+
 jdk:
   - openjdk8
 
+install: true
+
+
 #before_script:
 #  - rm -rf target
-#script: ./travis-build.sh
+script: ./travis-build.sh
 
 # TODO - travis branch -> develop!
 
-deploy:
-  # deploy develop to the staging environment
-  - provider: script
-    script: ./gradlew artifactoryPublish -PARTIFACTORY_PASSWORD=$ARTIFACTORY_PASSWORD --stacktrace
-    on:
-      branch: travis
+#deploy:
+#  # deploy develop to the staging environment
+#  - provider: script
+#    script: ./gradlew publishToMavenLocal artifactoryPublish -PARTIFACTORY_PASSWORD=$ARTIFACTORY_PASSWORD --stacktrace
+#    on:
+#      branch: travis
 
 env:
   global:
