@@ -1,3 +1,5 @@
+TODO switch to fineract-cn-lang!
+
 [![Build Status](https://api.travis-ci.org/aasaru/fineract-cn-lang.svg?branch=travis)](https://travis-ci.org/aasaru/fineract-cn-lang)
 
 # Apache Fineract CN Lang
