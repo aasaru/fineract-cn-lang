@@ -6,7 +6,7 @@ EXIT_STATUS=0
 # Builds and Publishes a SNAPSHOT
 function build_snapshot() {
   echo -e "Building Snapshot => Branch [$TRAVIS_BRANCH]"
-  ./gradlew clean publishToMavenLocal artifactoryPublish --stacktrace || EXIT_STATUS=$?
+  ./gradlew -DbuildInfo.build.number=${TRAVIS_COMMIT::7} clean publishToMavenLocal artifactoryPublish --stacktrace || EXIT_STATUS=$?
 }
 
 # Builds a Pull Request
