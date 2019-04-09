@@ -15,6 +15,12 @@ function build_pullrequest() {
   ./gradlew clean build || EXIT_STATUS=$?
 }
 
+# Builds other branches that we don't create snapshots and tags out from
+function build_otherbranch() {
+  echo -e "Building Branch [$TRAVIS_BRANCH]"
+  ./gradlew clean build || EXIT_STATUS=$?
+}
+
 # Builds and Publishes a Tag
 function build_tag() {
   echo -e "Building Tag => Branch [$TRAVIS_BRANCH], Tag [$TRAVIS_TAG]"
@@ -27,10 +33,14 @@ echo -e "TRAVIS_TAG=$TRAVIS_TAG"
 echo -e "TRAVIS_COMMIT=${TRAVIS_COMMIT::7}"
 echo -e "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
 
+# TODO - switch branch to develop!
+
 # Build Logic
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   build_pullrequest
-elif [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_TAG" == "" ]; then
+elif [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" != "travis" ] ; then
+  build_otherbranch
+elif [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_TAG" == "" ] ; then
   build_snapshot
 elif [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_TAG" != "" ]; then
   build_tag
@@ -39,5 +49,5 @@ else
   ./gradlew clean build
 fi
 
-exit ${EXIT_STATUS}    ./gradlew bintrayUpload notifyPluginPortal || EXIT_STATUS=$?
+exit ${EXIT_STATUS}
 
