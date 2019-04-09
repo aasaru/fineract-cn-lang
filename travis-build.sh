@@ -6,7 +6,7 @@ EXIT_STATUS=0
 # Builds and Publishes a SNAPSHOT
 function build_snapshot() {
   echo -e "Building Snapshot => Branch [$TRAVIS_BRANCH]"
-  ./gradlew clean publishToMavenLocal artifactoryPublish -Partifactory_password=$ARTIFACTORY_PASSWORD --stacktrace || EXIT_STATUS=$?
+  ./gradlew clean publishToMavenLocal artifactoryPublish --stacktrace || EXIT_STATUS=$?
 }
 
 # Builds a Pull Request
@@ -24,7 +24,7 @@ function build_otherbranch() {
 # Builds and Publishes a Tag
 function build_tag() {
   echo -e "Building Tag => Branch [$TRAVIS_BRANCH], Tag [$TRAVIS_TAG]"
-  ./gradlew clean publishToMavenLocal artifactoryPublish -Partifactory_password=$ARTIFACTORY_PASSWORD --stacktrace || EXIT_STATUS=$?
+  ./gradlew clean publishToMavenLocal artifactoryPublish --stacktrace || EXIT_STATUS=$?
 
 }
 
