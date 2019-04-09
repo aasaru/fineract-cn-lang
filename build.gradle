@@ -103,7 +103,7 @@ artifactory {
         repository {
             repoKey = "libs-snapshot-local"
             username = "travis-ci"
-            password = "${artifactory_password}"
+            password = findProperty("ARTIFACTORY_PASSWORD")
         }
 
         defaults {

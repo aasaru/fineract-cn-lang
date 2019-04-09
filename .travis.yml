@@ -12,7 +12,7 @@ jdk:
 deploy:
   # deploy develop to the staging environment
   - provider: script
-    script: ./gradlew artifactoryPublish -Partifactory_password=$ARTIFACTORY_PASSWORD --stacktrace
+    script: ./gradlew artifactoryPublish -PARTIFACTORY_PASSWORD=$ARTIFACTORY_PASSWORD --stacktrace
     on:
       branch: travis
 
