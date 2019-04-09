@@ -92,17 +92,19 @@ publishing {
             from components.java
             groupId project.group
             artifactId project.name
-            version project.version
+            version findProperty('versionFromGitTag') ?: project.version
         }
     }
 }
+
+String artifactoryRepoKey = findProperty('versionFromGitTag') ? 'libs-release-local' : 'libs-snapshot-local'
 
 artifactory {
     contextUrl = "https://mifos.jfrog.io/mifos"
     publish {
         repository {
-            repoKey = "libs-snapshot-local"
-            username = "travis-ci"
+            repoKey = artifactoryRepoKey
+            username = System.getenv("ARTIFACTORY_USER")
             password = System.getenv("ARTIFACTORY_PASSWORD")
         }
 

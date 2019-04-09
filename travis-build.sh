@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 set -e
+BUILD_SNAPSHOTS_BRANCH=travis
 EXIT_STATUS=0
 
 # Builds and Publishes a SNAPSHOT
 function build_snapshot() {
   echo -e "Building Snapshot => Branch [$TRAVIS_BRANCH]"
-  ./gradlew -DbuildInfo.build.number=${TRAVIS_COMMIT::7} clean publishToMavenLocal artifactoryPublish --stacktrace || EXIT_STATUS=$?
+  ./gradlew -DbuildInfo.build.number=${TRAVIS_COMMIT::7} clean artifactoryPublish --stacktrace || EXIT_STATUS=$?
 }
 
 # Builds a Pull Request
@@ -24,7 +25,7 @@ function build_otherbranch() {
 # Builds and Publishes a Tag
 function build_tag() {
   echo -e "Building Tag => Branch [$TRAVIS_BRANCH], Tag [$TRAVIS_TAG]"
-  ./gradlew clean publishToMavenLocal artifactoryPublish --stacktrace || EXIT_STATUS=$?
+  ./gradlew -PversionFromGitTag=$TRAVIS_TAG clean artifactoryPublish --stacktrace || EXIT_STATUS=$?
 
 }
 
@@ -38,7 +39,7 @@ echo -e "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
 # Build Logic
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   build_pullrequest
-elif [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" != "travis" ] ; then
+elif [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" != "$BUILD_SNAPSHOTS_BRANCH" ] ; then
   build_otherbranch
 elif [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_TAG" == "" ] ; then
   build_snapshot
