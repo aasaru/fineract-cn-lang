@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
+#Exit immediately if a command exits with a non-zero status.
 set -e
+
+# TODO - switch branch to develop!
+
 BUILD_SNAPSHOTS_BRANCH=travis
 EXIT_STATUS=0
 
@@ -16,16 +20,16 @@ function build_pullrequest() {
   ./gradlew clean build || EXIT_STATUS=$?
 }
 
-# Builds other branches that we don't create snapshots and tags out from
+# For other branches we need to add branch name as prefix
 function build_otherbranch() {
   echo -e "Building non-snapshots branch [$TRAVIS_BRANCH]. Won't publish anything to Artifactory."
-  ./gradlew clean build || EXIT_STATUS=$?
+  ./gradlew -DbuildInfo.build.number=${TRAVIS_COMMIT::7} -PversionPrefix=$TRAVIS_BRANCH- clean artifactoryPublish --stacktrace || EXIT_STATUS=$?
 }
 
 # Builds and Publishes a Tag
 function build_tag() {
   echo -e "Building tag [$TRAVIS_TAG] and publishing it as a release"
-  ./gradlew -PversionFromGitTag=$TRAVIS_TAG clean artifactoryPublish --stacktrace || EXIT_STATUS=$?
+  ./gradlew -PreleaseTag=$TRAVIS_TAG clean artifactoryPublish --stacktrace || EXIT_STATUS=$?
 
 }
 
@@ -33,8 +37,6 @@ echo -e "TRAVIS_BRANCH=$TRAVIS_BRANCH"
 echo -e "TRAVIS_TAG=$TRAVIS_TAG"
 echo -e "TRAVIS_COMMIT=${TRAVIS_COMMIT::7}"
 echo -e "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
-
-# TODO - switch branch to develop!
 
 # Build Logic
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
