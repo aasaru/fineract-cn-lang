@@ -66,7 +66,7 @@ public final class ServiceError {
   public String toString() {
     return "ServiceError{" +
             "code=" + code +
-            ", message='" + message + '\'' +
+            ",  message='" + message + '\'' +
             '}';
   }
 }
