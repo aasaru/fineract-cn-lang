@@ -92,7 +92,7 @@ publishing {
             from components.java
             groupId project.group
             artifactId project.name
-            version findProperty('releaseTag') ?: findProperty('versionPrefix') + project.version
+            version findProperty('externalVersion') ?: project.version
         }
     }
 }
@@ -102,7 +102,7 @@ artifactory {
     contextUrl = System.getenv("ARTIFACTORY_URL")
     publish {
         repository {
-            repoKey = artifactoryRepoKey
+            repoKey = findProperty('artifactoryRepoKey')
             username = System.getenv("ARTIFACTORY_USER")
             password = System.getenv("ARTIFACTORY_PASSWORD")
         }
