@@ -102,7 +102,7 @@ artifactory {
     contextUrl = System.getenv("ARTIFACTORY_URL")
     publish {
         repository {
-            repoKey = findProperty('artifactoryRepoKey')
+            repoKey = project.property('artifactoryRepoKey')
             username = System.getenv("ARTIFACTORY_USER")
             password = System.getenv("ARTIFACTORY_PASSWORD")
         }
