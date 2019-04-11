@@ -97,11 +97,12 @@ publishing {
     }
 }
 
+String artifactoryRepoKey = findProperty('releaseTag') ? 'libs-release-local' : 'libs-snapshot-local'
 artifactory {
     contextUrl = System.getenv("ARTIFACTORY_URL")
     publish {
         repository {
-            repoKey = (findProperty('releaseTag') ? 'libs-release-local' : 'libs-snapshot-local')
+            repoKey = artifactoryRepoKey
             username = System.getenv("ARTIFACTORY_USER")
             password = System.getenv("ARTIFACTORY_PASSWORD")
         }

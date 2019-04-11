@@ -2,10 +2,6 @@
 
 #Exit immediately if a command exits with a non-zero status.
 set -e
-
-# TODO - switch branch to develop!
-
-BUILD_SNAPSHOTS_BRANCH=travis
 EXIT_STATUS=0
 
 # Builds and Publishes a SNAPSHOT
@@ -22,7 +18,7 @@ function build_pullrequest() {
 
 # For other branches we need to add branch name as prefix
 function build_otherbranch() {
-  echo -e "Building non-snapshots branch [$TRAVIS_BRANCH]. Won't publish anything to Artifactory."
+  echo -e "Building a snapshot out of branch [$TRAVIS_BRANCH] and publishing it with prefix '$TRAVIS_BRANCH-'"
   ./gradlew -DbuildInfo.build.number=${TRAVIS_COMMIT::7} -PversionPrefix=$TRAVIS_BRANCH- clean artifactoryPublish --stacktrace || EXIT_STATUS=$?
 }
 
