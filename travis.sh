@@ -18,8 +18,8 @@ function build_pullrequest() {
 
 # For other branches we need to add branch name as prefix
 function build_otherbranch() {
-  echo -e "Building a snapshot out of branch [$TRAVIS_BRANCH] and publishing it with prefix '$TRAVIS_BRANCH-'"
-  ./gradlew -PartifactoryRepoKey=libs-snapshot-local -DbuildInfo.build.number=${TRAVIS_COMMIT::7} -PexternalVersion=$TRAVIS_BRANCH-SNAPSHOT artifactoryPublish --stacktrace || EXIT_STATUS=$?
+  echo -e "Building a snapshot out of branch [$TRAVIS_BRANCH] and publishing it with prefix '${TRAVIS_BRANCH}-SNAPSHOT'"
+  ./gradlew -PartifactoryRepoKey=libs-snapshot-local -DbuildInfo.build.number=${TRAVIS_COMMIT::7} -PexternalVersion=${TRAVIS_BRANCH}-SNAPSHOT artifactoryPublish --stacktrace || EXIT_STATUS=$?
 }
 
 # Builds and Publishes a Tag

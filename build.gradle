@@ -97,7 +97,6 @@ publishing {
     }
 }
 
-String artifactoryRepoKey = findProperty('releaseTag') ? 'libs-release-local' : 'libs-snapshot-local'
 artifactory {
     contextUrl = System.getenv("ARTIFACTORY_URL")
     publish {
