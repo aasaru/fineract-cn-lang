@@ -25,7 +25,7 @@ install: true
 script: "./travis.sh"
 env:
   global:
-    - BUILD_SNAPSHOTS_BRANCH=develop
+    - BUILD_SNAPSHOTS_BRANCH=travis
     - ARTIFACTORY_URL=https://mifos.jfrog.io/mifos
     - ARTIFACTORY_USER=travis-ci
     - secure: "Q4gZl0Tt216rW+kUsJdrslBwvlnzj3BuNEqVrn6OJfCtgGOdj/LKt6j7/aA0n/IjuO/tTvtqaFwvpnMveDoj5pq+hjHwKeFakGWnRlhTw1+kGYDtgW27wj/a5YjTO8so2UfV31jW0tzcfeasM1IpY2sKYx8cTv/6KEA0mlV/5sMLyNfEezJ31fPorBZQAb5JiQj4vb7g+xn0cbGwE8YPKNMf9MYP6ajcON5+iYEl5UWpIxAa5A5r6kcd0VQoDNkTwyBiKf310b8op+B9SIGdupqxCh8jWPgzXoKVpJsvkNL/Vn3aUEgXLx/2AApGRAqq5Y4zDibJiuzCY33GX/MdE5kT76r0klmPi8srAraEmcURckaCotnu1OU3gxZv6cooIyLCPQ1EjKVYp1vxJzACmg3cU4qk6KZvcJlhWOpw2RNpN7Ty2UYa6UpQ56swwqINmBwRhApPfQQd/XL8FSfsq1fJ4IHGvl7AUUu97uSc9SyJfMttYrl7Oo7k3IEuI79KE/AVYtNl/jWxn+kR2aQ2F0ms73iklJzSDOZA4VeZxQQFwI0ISdVikbVcF34rCTLu6V78yYqukFGfkdV+2eSlkhfOeffJRgBAIilKqfJogkO+1NGANk/czBZg+FUyZ3dRpvgoUxu5bZwKOUE+0E0dSZTlYvsp/Ot//klwXxv7EeU="
