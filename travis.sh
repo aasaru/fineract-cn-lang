@@ -18,6 +18,8 @@
 # under the License.
 #
 
+# Documentation: https://cwiki.apache.org/confluence/display/FINERACT/Fineract-CN+Artifactory
+
 #Exit immediately if a command exits with a non-zero status.
 set -e
 EXIT_STATUS=0
