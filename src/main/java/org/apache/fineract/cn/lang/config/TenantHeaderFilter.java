@@ -44,6 +44,7 @@ public final class TenantHeaderFilter extends OncePerRequestFilter {
 
     if (tenantHeaderValue == null || tenantHeaderValue.isEmpty()) {
       response.sendError(400, "Header [" + TENANT_HEADER + "] must be given!");
+      return;
     } else {
       TenantContextHolder.clear();
       TenantContextHolder.setIdentifier(tenantHeaderValue);
