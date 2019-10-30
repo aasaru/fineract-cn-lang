@@ -40,6 +40,12 @@ public final class TenantHeaderFilter extends OncePerRequestFilter {
   protected void doFilterInternal(final HttpServletRequest request,
                                   final HttpServletResponse response,
                                   final FilterChain filterChain) throws ServletException, IOException {
+
+    if (request.getRequestURI().contains(Health.HEALTH_URL_CONTEXT_PATH)) {
+      filterChain.doFilter(request, response);
+      return;
+    }
+
     final String tenantHeaderValue = request.getHeader(TenantHeaderFilter.TENANT_HEADER);
 
     if (tenantHeaderValue == null || tenantHeaderValue.isEmpty()) {
