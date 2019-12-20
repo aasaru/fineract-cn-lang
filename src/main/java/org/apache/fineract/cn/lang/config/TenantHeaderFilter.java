@@ -41,7 +41,8 @@ public final class TenantHeaderFilter extends OncePerRequestFilter {
                                   final HttpServletResponse response,
                                   final FilterChain filterChain) throws ServletException, IOException {
 
-    if (request.getRequestURI().contains(Health.HEALTH_URL_CONTEXT_PATH)) {
+    // TODO options is here temporarily
+    if (request.getRequestURI().contains(Health.HEALTH_URL_CONTEXT_PATH) || "OPTIONS".equalsIgnoreCase(request.getMethod())) {
       filterChain.doFilter(request, response);
       return;
     }
